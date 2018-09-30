@@ -1,0 +1,26 @@
+{
+  "name": "webpack-demo",
+  "version": "1.0.0",
+  "description": "source code interpretation",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewiscutey/Webpack-demo.git"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "lewis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lewiscutey/Webpack-demo/issues"
+  },
+  "homepage": "https://github.com/lewiscutey/Webpack-demo#readme",
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
+}
