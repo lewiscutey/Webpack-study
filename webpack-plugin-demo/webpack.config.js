@@ -8,11 +8,17 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 module.exports = {
   entry: {
     'index': ['./src/index.js'],
-    'main': ['./src/main.js']
+    // 'main': ['./src/main.js']
   },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].bundle.js'
+  },
+  resolveLoader: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'src/loaders')
+    ]
   },
   module: {
     rules: [
@@ -27,6 +33,22 @@ module.exports = {
         //   use: 'css-loader'
         // })
         use: [MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'a-loader.js',
+            options: {
+              aa: 11,
+              bb: 22
+            }
+          },
+          'b-loader.js',
+          'c-loader.js',
+          {loader: 'babel-loader'}
+        ],
+        exclude: /node_modules/
       }
     ]
   },
