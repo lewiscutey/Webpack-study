@@ -34,22 +34,22 @@ module.exports = {
         // })
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
-      {
-        test: /\.js$/,
-        use: [
-          {
-            loader: 'a-loader.js',
-            options: {
-              aa: 11,
-              bb: 22
-            }
-          },
-          'b-loader.js',
-          'c-loader.js',
-          {loader: 'babel-loader'}
-        ],
-        exclude: /node_modules/
-      }
+      // {
+      //   test: /\.js$/,
+      //   use: [
+      //     {
+      //       loader: 'a-loader.js',
+      //       options: {
+      //         aa: 11,
+      //         bb: 22
+      //       }
+      //     },
+      //     'b-loader.js',
+      //     'c-loader.js',
+      //     {loader: 'babel-loader'}
+      //   ],
+      //   exclude: /node_modules/
+      // }
     ]
   },
   plugins: [
