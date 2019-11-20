@@ -5,6 +5,7 @@
   "main": "dist/webpack-numbers.js",
   "module": "src/index.js",
   "scripts": {
+    "start": "http-server dist",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +13,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "http-server": "^0.11.1",
     "lodash": "^4.17.15",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "workbox-webpack-plugin": "^4.3.1"
   }
 }
