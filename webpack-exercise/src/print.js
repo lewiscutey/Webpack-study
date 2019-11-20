@@ -1,3 +1,5 @@
 export default function printMe() {
-  console.error(`print.js`);
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(process.env.NODE_ENV);
+  }
 }
