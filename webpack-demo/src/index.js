@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import printMe from './print';
+
+import Styles from 'style-loader!css-loader?modules!./styles.css';
 // import './style.css';  // 通过`import`引入 CSS 文件
 // import Icon from './icon.jpg'; // Icon 是图片的 URL
 // import data from './data.json'; //  json数据

@@ -22,4 +22,4 @@ h1.intercept({
     console.log(tap, '------intercept tap')
   }
 })
-h1.call(666);
+// h1.call(666);
