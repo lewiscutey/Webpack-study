@@ -1,2 +1,4 @@
-import "./style.scss";
+import './a-loader!./style.scss';
+
+
 console.log("hello,  world");

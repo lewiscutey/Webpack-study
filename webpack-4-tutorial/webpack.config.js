@@ -26,8 +26,14 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader',  'postcss-loader', 'sass-loader']
-      }
+        // enforce: 'post',
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      },
+      // {
+      //   test: /\.scss$/,
+      //   enforce: 'post',
+      //   use: ['css-loader', 'sass-loader']
+      // }
     ],
   },
   plugins: [

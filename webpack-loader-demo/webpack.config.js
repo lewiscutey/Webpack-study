@@ -7,8 +7,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: {
-    // 'index': ['./src/index.js'],
-    'main': ['./src/main.js']
+    'index': ['./src/index.js'],
+    // 'main': ['./src/main.js']
     // 'app': './src/app.js'
   },
   output: {
@@ -59,7 +59,7 @@ module.exports = {
           },
           'b-loader.js',
           'c-loader.js',
-          {loader: 'babel-loader'}
+          // {loader: 'babel-loader'}
         ],
         exclude: /node_modules/
       }
