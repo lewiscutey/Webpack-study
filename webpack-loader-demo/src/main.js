@@ -1,4 +1,4 @@
-require('./base.css')
-require('./main.css')
+// require('./base.css')
+// require('./main.css')
 
 console.log('main')

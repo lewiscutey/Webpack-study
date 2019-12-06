@@ -7,6 +7,5 @@ module.exports = function(source) {
   return `export default ${ JSON.stringify(source) }`;
 }
 module.exports.pitch = function(remainingRequest, precedingRequest, data) {
-  data.value = 24
   console.log(`a-pitch`)
 }
