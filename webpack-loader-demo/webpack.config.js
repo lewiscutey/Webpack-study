@@ -37,15 +37,15 @@ module.exports = {
       // },
       {
         test: /\.css$/,
-        // use: [
-        //   {loader: 'style-loader'},
-        //   {loader: 'css-loader'}
-        // ],
+        use: [
+          {loader: 'style-loader'},
+          {loader: 'css-loader'}
+        ],
         // use: ExtractTextPlugin.extract({
         //   fallback: 'style-loader',
         //   use: 'css-loader'
         // })
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        // use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.js$/,

@@ -1,5 +1,5 @@
-require('./base.css')
-require('./index.css')
+import './base.css'
+import './index.css'
 
 export const aa = (option) => {
   return option;
