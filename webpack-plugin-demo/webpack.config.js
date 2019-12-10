@@ -1,10 +1,12 @@
 const path = require('path')
 const FileListPlugin = require('./src/plugins/FileListPlugin')
+const SplitPlugin = require('./src/plugins/SplitPlugin')
 
 module.exports = {
   mode: "production",
   entry: {
-    app: './src/a.js'
+    app: './src/a.js',
+    // index: './src/index.js'
   },
   output: {
     filename: '[name].[chunkhash].js',
@@ -44,6 +46,7 @@ module.exports = {
   resolve: {
   },
   plugins: [
-    new FileListPlugin()
+    // new FileListPlugin()
+    new SplitPlugin()
   ]
 }
