@@ -3,7 +3,7 @@ module.exports = function() {
   return;
 }
 
-// module.exports.pitch = function(remainingRequest, precedingRequest, data) {
-//   console.log(`b-pitch`)
-//   return JSON.stringify(remainingRequest);
-// }
+module.exports.pitch = function(remainingRequest, precedingRequest, data) {
+  console.log(`b-pitch`)
+  return JSON.stringify(remainingRequest);
+}
