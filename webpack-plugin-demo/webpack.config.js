@@ -1,6 +1,6 @@
 const path = require('path')
 const FileListPlugin = require('./src/plugins/FileListPlugin')
-const SplitPlugin = require('./src/plugins/SplitPlugin')
+const ExtractChunksPlugin = require('./src/plugins/ExtractChunksPlugin')
 
 module.exports = {
   mode: "production",
@@ -19,7 +19,7 @@ module.exports = {
       name: 'bundle'
     },
     splitChunks: {
-      chunks: 'all',
+      chunks: 'async',
       minSize: 30000,
       maxSize: 0,
       minChunks: 1,
@@ -29,10 +29,10 @@ module.exports = {
       automaticNameMaxLength: 30,
       name: true,
       cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        },
+        // vendors: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   priority: -10
+        // },
         default: {
           minChunks: 2,
           priority: -20,
@@ -47,6 +47,6 @@ module.exports = {
   },
   plugins: [
     // new FileListPlugin()
-    new SplitPlugin()
+    new ExtractChunksPlugin()
   ]
 }
