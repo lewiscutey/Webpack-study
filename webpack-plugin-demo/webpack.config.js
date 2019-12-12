@@ -3,7 +3,8 @@ const FileListPlugin = require('./src/plugins/FileListPlugin')
 const ExtractChunksPlugin = require('./src/plugins/ExtractChunksPlugin')
 
 module.exports = {
-  mode: "production",
+  mode: "development",
+  devtool: 'source-map',
   entry: {
     app: './src/a.js',
     // index: './src/index.js'
@@ -15,11 +16,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   optimization: {
-    runtimeChunk: {
-      name: 'bundle'
-    },
+    // runtimeChunk: {
+    //   name: 'bundle'
+    // },
     splitChunks: {
-      chunks: 'async',
+      chunks: 'all',
       minSize: 30000,
       maxSize: 0,
       minChunks: 1,
