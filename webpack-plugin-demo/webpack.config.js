@@ -10,8 +10,8 @@ module.exports = {
     // index: './src/index.js'
   },
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].bundle.[chunkhash:8].js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
   },
@@ -30,10 +30,10 @@ module.exports = {
       automaticNameMaxLength: 30,
       name: true,
       cacheGroups: {
-        // vendors: {
-        //   test: /[\\/]node_modules[\\/]/,
-        //   priority: -10
-        // },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
         default: {
           minChunks: 2,
           priority: -20,

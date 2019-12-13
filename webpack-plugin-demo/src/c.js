@@ -1,5 +1,5 @@
 import { mod } from "./d.js";
-import Vue from 'vue'
+// import Vue from 'vue'
 
 mod(100, 11)
 

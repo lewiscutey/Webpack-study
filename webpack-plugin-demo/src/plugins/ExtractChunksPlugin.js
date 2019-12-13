@@ -53,8 +53,9 @@ class ExtractChunksPlugin {
         }
       })
 
-      // 移除公共chunk
+      // chunk中移除公共chunk
       compilation.hooks.optimizeChunks.tap(pluginName, chunks => {
+        debugger
         chunks.forEach(chunk => {
           extractModules.forEach(module => {
             if(chunk.containsModule(module) && chunk.hasEntryModule()) {
@@ -64,8 +65,9 @@ class ExtractChunksPlugin {
         })
       })
 
-      // 各个chunk配置
+      // 各个chunk配置附加参数及全局quickGlobal
       compilation.hooks.chunkAsset.tap(pluginName, (chunk, filename) => {
+        debugger
         const sourceChildren = compilation.assets[filename]._source.children
 
         let _actualParamStr = actualParamStr
@@ -97,12 +99,34 @@ class ExtractChunksPlugin {
               _actualParamStr
             )
             item._source._value = content
+          } else if (item.constructor.name === 'CachedSource') {
+            let source = item._source;
+
+            if(source.constructor.name === 'ReplaceSource' && source.replacements && source.replacements.length) {
+              debugger
+              source.replacements.map(items => {
+                // 加上$res_require$引入
+                let chunkName = items.content.match(/\w+(?=\.js)/gi) && items.content.match(/\w+(?=\.js)/gi)[0]
+                let chunkPath = `${compiler.outputPath}/Chunks/${chunkName}.js`
+                items.content = items.content.replace(
+                  /\s=\s__webpack_require__\((.+?)\);/,
+                  ` = $app_evaluate$('${chunkPath}');` // eslint-disable-line
+                )
+                // 引入额外方法
+                items.content = items.content.replace(
+                  /(?<=(modules\[moduleId\].call\())module.exports,\s+module,\s+module.exports,\s+__webpack_require__/,
+                  _actualParamStr
+                )
+              })
+            }
+
+            item._source = source
           } else if (item.constructor.name === 'String') {
             // window -> global
             let content = windowReplaceWithGlobal(item)
             // 引入额外方法
             content = content.replace(
-              /(?<=function\()module,\s+exports(,\s+__webpack_require__)?/,
+              /(?<=function\()module,\s+__webpack_exports__(,\s+__webpack_require__)?/,
               _formalParamStr
             )
             sourceChildren[index] = content
