@@ -1,5 +1,5 @@
 /******/ (function(modules) { // webpackBootstrap
-var quickGlobal = Object.getPrototypeOf(global) || global;/******/ 	// The module cache
+/******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
 /******/ 	// The require function
@@ -96,15 +96,16 @@ var quickGlobal = Object.getPrototypeOf(global) || global;/******/ 	// The modul
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _b__WEBPACK_IMPORTED_MODULE_0__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/b.js');
-/* harmony import */ var _common1_aa__WEBPACK_IMPORTED_MODULE_1__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/aa.js');
-/* harmony import */ var _common_aa__WEBPACK_IMPORTED_MODULE_2__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/aa.js');
+/* harmony import */ var _d__WEBPACK_IMPORTED_MODULE_1__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/d.js');
 
 
-
+// import { del } from './common1/aa'
+// import { del as del1 } from './common/aa'
 // import Vue from 'vue'
 Object(_b__WEBPACK_IMPORTED_MODULE_0__["add"])(1, 2)
-Object(_common1_aa__WEBPACK_IMPORTED_MODULE_1__["del"])(1, 2)
-Object(_common_aa__WEBPACK_IMPORTED_MODULE_2__["del"])(1, 2)
+// del(1, 2)
+// del1(1, 2)
+Object(_d__WEBPACK_IMPORTED_MODULE_1__["mod"])(100, 11)
 
 // import('./c').then(del => del(1, 2))
 
@@ -114,10 +115,10 @@ var vm = new Vue({
 
 /***/ }),
 
-/***/ "./src/common/aa.js":
-/*!**************************!*\
-  !*** ./src/common/aa.js ***!
-  \**************************/
+/***/ "./src/common1/aa.js":
+/*!***************************!*\
+  !*** ./src/common1/aa.js ***!
+  \***************************/
 /*! exports provided: del */
 /***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$) {
 

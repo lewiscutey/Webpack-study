@@ -1,4 +1,4 @@
-(quickGlobal["webpackJsonp"] = quickGlobal["webpackJsonp"] || []).push([["b"],{
+(quickappGlobal["webpackJsonp"] = quickappGlobal["webpackJsonp"] || []).push([["b"],{
 
 /***/ "./src/b.js":
 /*!******************!*\
@@ -12,13 +12,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
 /* harmony import */ var _d_js__WEBPACK_IMPORTED_MODULE_0__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/d.js');
 /* harmony import */ var _common_aa__WEBPACK_IMPORTED_MODULE_1__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/aa.js');
+/* harmony import */ var _common1_aa__WEBPACK_IMPORTED_MODULE_2__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/aa.js');
 
 
 
 
 Object(_d_js__WEBPACK_IMPORTED_MODULE_0__["mod"])(100, 11)
 Object(_common_aa__WEBPACK_IMPORTED_MODULE_1__["del"])(100, 11)
-Object(_common_aa__WEBPACK_IMPORTED_MODULE_1__["del"])(100, 11)
+Object(_common1_aa__WEBPACK_IMPORTED_MODULE_2__["del"])(100, 11)
 
 function add(a, b) {
   return a + b

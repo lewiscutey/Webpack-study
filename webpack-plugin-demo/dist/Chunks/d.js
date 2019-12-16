@@ -1,4 +1,4 @@
-(quickGlobal["webpackJsonp"] = quickGlobal["webpackJsonp"] || []).push([["d"],{
+(quickappGlobal["webpackJsonp"] = quickappGlobal["webpackJsonp"] || []).push([["d"],{
 
 /***/ "./src/d.js":
 /*!******************!*\

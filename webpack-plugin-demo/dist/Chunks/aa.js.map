@@ -1,1 +1,1 @@
-{"version":3,"sources":["webpack:///./src/common1/aa.js"],"names":[],"mappings":";;;;;;;;;;AAAA;AAAA;AAAO;AACP;AACA,C","file":"Chunks/aa.js","sourcesContent":["export function del (a, b) {\n  return a - b\n}"],"sourceRoot":""}
+{"version":3,"sources":["webpack:///./src/common/aa.js"],"names":[],"mappings":";;;;;;;;;;AAAA;AAAA;AAAO;AACP;AACA,C","file":"Chunks/aa.js","sourcesContent":["export function del (a, b) {\n  return a - b\n}"],"sourceRoot":""}

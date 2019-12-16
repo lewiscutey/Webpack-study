@@ -48,6 +48,8 @@ module.exports = {
   },
   plugins: [
     // new FileListPlugin()
-    new ExtractChunksPlugin()
+    new ExtractChunksPlugin({
+      chunkPath: ''
+    })
   ]
 }
