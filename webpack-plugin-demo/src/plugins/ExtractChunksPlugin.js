@@ -45,6 +45,7 @@ class ExtractChunksPlugin {
     compiler.hooks.thisCompilation.tap(pluginName, compilation => {
       // 抽取公共chunk
       compilation.hooks.optimizeDependenciesAdvanced.tap(pluginName, modules => {
+        debugger
         for (const module of modules) {
           // 被依赖小于2，不会当做公共chunk进行抽取
           if (module.reasons.length < 2) continue
@@ -54,6 +55,7 @@ class ExtractChunksPlugin {
           if (hasChunkName) continue
 
           const newChunk = compilation.addChunk(chunkName)
+          debugger
 
           // Module内部会进行关联，这个方法判断如果已经存在这个chunk，则返回false；
           if (module.addChunk(newChunk)) {
@@ -61,12 +63,21 @@ class ExtractChunksPlugin {
             extractModules.set(chunkName, module)
           }
 
+          if (newChunk.groupsIterable.chunkGroup) {
+            newChunk.groupsIterable.chunkGroup.addChild(newChunk)
+          }
+
           newChunk.hasExistedChunk = true
         }
       })
 
+
+      compilation.hooks.optimizeChunkIds.tap(pluginName, chunks => {
+        debugger
+      })
       // 移除页面Chunk中已经存在的公共module，因为这个公共module已经以单独chunk的形式存在
       compilation.hooks.optimizeChunks.tap(pluginName, chunks => {
+        debugger
         chunks.forEach(chunk => {
           extractModules.forEach(module => {
             if (chunk.containsModule(module) && chunk.hasEntryModule()) {
@@ -79,6 +90,7 @@ class ExtractChunksPlugin {
 
       // 各个chunk配置附加参数及全局quickappGlobal
       compilation.hooks.chunkAsset.tap(pluginName, (chunk, filename) => {
+        debugger
         const sourceChildren = compilation.assets[filename]._source.children
 
         let _actualParamStr = actualParamStr

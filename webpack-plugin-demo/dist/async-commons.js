@@ -1,7 +1,124 @@
-export function mod(a, b) {
+(quickappGlobal["webpackJsonp"] = quickappGlobal["webpackJsonp"] || []).push([["async-commons"],{
+
+/***/ "./src/a.scss":
+/*!********************!*\
+  !*** ./src/a.scss ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "div {\n  color: red; }\n  div a {\n    display: block; }\n", ""]);
+
+
+/***/ }),
+
+/***/ "./src/b.js":
+/*!******************!*\
+  !*** ./src/b.js ***!
+  \******************/
+/*! exports provided: add */
+/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$, $app_define_wrap$) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
+/* harmony import */ var _d_js__WEBPACK_IMPORTED_MODULE_0__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/d.js');
+/* harmony import */ var _common_aa__WEBPACK_IMPORTED_MODULE_1__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/aa.js');
+/* harmony import */ var _common1_aa__WEBPACK_IMPORTED_MODULE_2__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/aa.js');
+
+
+
+
+Object(_d_js__WEBPACK_IMPORTED_MODULE_0__["mod"])(100, 11)
+Object(_common_aa__WEBPACK_IMPORTED_MODULE_1__["del"])(100, 11)
+Object(_common1_aa__WEBPACK_IMPORTED_MODULE_2__["del"])(100, 11)
+
+function add(a, b) {
+  return a + b
+}
+
+
+/***/ }),
+
+/***/ "./src/c.js":
+/*!******************!*\
+  !*** ./src/c.js ***!
+  \******************/
+/*! exports provided: default */
+/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$, $app_define_wrap$) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return del; });
+/* harmony import */ var _d_js__WEBPACK_IMPORTED_MODULE_0__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/d.js');
+
+// import Vue from 'vue'
+
+Object(_d_js__WEBPACK_IMPORTED_MODULE_0__["mod"])(100, 11)
+
+__webpack_require__.e(/*! import() */ "async-commons").then(__webpack_require__.bind(null, /*! ./b.js */ "./src/b.js")).then(add => add(1, 2));
+
+function del(a, b) {
+  return a - b
+}
+
+var vm = new Vue({
+  // 选项
+})
+
+/***/ }),
+
+/***/ "./src/common/aa.js":
+/*!**************************!*\
+  !*** ./src/common/aa.js ***!
+  \**************************/
+/*! exports provided: del */
+/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$, $app_define_wrap$) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "del", function() { return del; });
+function del (a, b) {
+  return a - b
+}
+
+/***/ }),
+
+/***/ "./src/common1/aa.js":
+/*!***************************!*\
+  !*** ./src/common1/aa.js ***!
+  \***************************/
+/*! exports provided: del */
+/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$, $app_define_wrap$) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "del", function() { return del; });
+function del (a, b) {
+  return a - b
+}
+
+/***/ }),
+
+/***/ "./src/d.js":
+/*!******************!*\
+  !*** ./src/d.js ***!
+  \******************/
+/*! exports provided: mod, d */
+/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$, $app_define_wrap$) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mod", function() { return mod; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return d; });
+function mod(a, b) {
   return a % b
 }
-export const d = 'd'
+const d = 'd'
 
 class ExtractChunksPlugin {
   constructor(options) {
@@ -154,3 +271,9 @@ class ExtractChunksPlugin {
     })
   }
 }
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=async-commons.js.map
