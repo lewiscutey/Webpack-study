@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run clear && npm run build",
     "build": "webpack",
-    "clear": "rm -rf dist"
+    "clear": "rm -rf dist",
+    "debug": "node --inspect-brk ./node_modules/webpack/bin/webpack.js"
   },
   "keywords": [],
   "author": "",

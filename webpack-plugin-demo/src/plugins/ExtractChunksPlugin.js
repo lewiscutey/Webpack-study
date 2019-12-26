@@ -42,10 +42,12 @@ class ExtractChunksPlugin {
   }
 
   apply(compiler) {
+    compiler.hooks.emit.tap(pluginName, compilation => {
+      debugger
+    })
     compiler.hooks.thisCompilation.tap(pluginName, compilation => {
       // 抽取公共chunk
       compilation.hooks.optimizeDependenciesAdvanced.tap(pluginName, modules => {
-        debugger
         for (const module of modules) {
           // 被依赖小于2，不会当做公共chunk进行抽取
           if (module.reasons.length < 2) continue
@@ -55,7 +57,6 @@ class ExtractChunksPlugin {
           if (hasChunkName) continue
 
           const newChunk = compilation.addChunk(chunkName)
-          debugger
 
           // Module内部会进行关联，这个方法判断如果已经存在这个chunk，则返回false；
           if (module.addChunk(newChunk)) {
@@ -71,13 +72,8 @@ class ExtractChunksPlugin {
         }
       })
 
-
-      compilation.hooks.optimizeChunkIds.tap(pluginName, chunks => {
-        debugger
-      })
       // 移除页面Chunk中已经存在的公共module，因为这个公共module已经以单独chunk的形式存在
       compilation.hooks.optimizeChunks.tap(pluginName, chunks => {
-        debugger
         chunks.forEach(chunk => {
           extractModules.forEach(module => {
             if (chunk.containsModule(module) && chunk.hasEntryModule()) {
