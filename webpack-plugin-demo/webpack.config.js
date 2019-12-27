@@ -24,9 +24,9 @@ module.exports = {
     ]
   },
   optimization: {
-    // runtimeChunk: {
-    //   name: 'bundle'
-    // },
+    runtimeChunk: {
+      name: 'bundle'
+    },
     splitChunks: {
       chunks: 'all',
       minSize: 5000,
