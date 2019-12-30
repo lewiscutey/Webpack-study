@@ -72,9 +72,18 @@ class ExtractChunksPlugin {
         }
       })
 
+      compilation.hooks.optimizeChunkAssets.tapAsync(pluginName, (chunks, callback) => {
+        chunks.forEach(chunk => {
+          chunk.files.forEach(file => {
+            console.log(1111, compilation.assets[file]._source.children)
+          });
+        });
+    
+        callback();
+      })
+
       // 移除页面Chunk中已经存在的公共module，因为这个公共module已经以单独chunk的形式存在
       compilation.hooks.optimizeChunks.tap(pluginName, chunks => {
-        console.log(`optimizeChunks`)
         chunks.forEach(chunk => {
           extractModules.forEach(module => {
             if (chunk.containsModule(module) && chunk.hasEntryModule()) {
@@ -87,7 +96,6 @@ class ExtractChunksPlugin {
 
       // 各个chunk配置附加参数及全局quickappGlobal
       compilation.hooks.chunkAsset.tap(pluginName, (chunk, filename) => {
-        console.log(`chunkAsset`)
         debugger
         const sourceChildren = compilation.assets[filename]._source.children
 
