@@ -48,3 +48,29 @@ module.exports = {
     }
   }
 }
+
+class Event {
+  constructor() {
+    this.events = {}
+  }
+  on(eventName, callback) {
+    if(!this.events[eventName]) {
+      this.events[eventName] = [callback]
+    } else {
+      this.events[eventName].push(callback)
+    }
+  }
+  emit(eventName) {
+    this.events[eventName] && this.events[eventName].forEach(cb => cb())
+  }
+  remove(eventName, callback) {
+    this.events[eventName] = this.events[eventName] ? this.events[eventName].filter(cb => cb !== callback) : []
+  }
+  once(eventName, callback) {
+    let fn = () => {
+      callback()
+      this.remove(eventName, fn)
+    }
+    this.on(eventName, fn)
+  }
+}

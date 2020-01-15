@@ -42,10 +42,16 @@ class ExtractChunksPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.emit.tap(pluginName, compilation => {
-      debugger
-    })
     compiler.hooks.thisCompilation.tap(pluginName, compilation => {
+      // compilation.hooks.optimizeChunks.tap(pluginName, chunks => {
+      //   chunks.forEach(chunk => {
+      //     if(chunk.name === 'app') {
+      //       chunk._modules.forEach(item => {
+      //         item.value._chunks.delete(chunk);
+      //       })
+      //     }
+      //   })
+      // })
       // 抽取公共chunk
       compilation.hooks.optimizeDependenciesAdvanced.tap(pluginName, modules => {
         for (const module of modules) {
@@ -96,7 +102,6 @@ class ExtractChunksPlugin {
 
       // 各个chunk配置附加参数及全局quickappGlobal
       compilation.hooks.chunkAsset.tap(pluginName, (chunk, filename) => {
-        debugger
         const sourceChildren = compilation.assets[filename]._source.children
 
         let _actualParamStr = actualParamStr
