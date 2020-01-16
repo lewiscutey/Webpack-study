@@ -43,6 +43,12 @@ class ExtractChunksPlugin {
 
   apply(compiler) {
     compiler.hooks.thisCompilation.tap(pluginName, compilation => {
+      // test
+      compilation.hooks.afterOptimizeChunkAssets.tap(pluginName, chunks => {
+        debugger
+      })
+
+      // 删除某个chunk的公共依赖，使自己脱离公共chunk的抽取，直接打包到自己的文件内部
       // compilation.hooks.optimizeChunks.tap(pluginName, chunks => {
       //   chunks.forEach(chunk => {
       //     if(chunk.name === 'app') {
@@ -52,6 +58,7 @@ class ExtractChunksPlugin {
       //     }
       //   })
       // })
+
       // 抽取公共chunk
       compilation.hooks.optimizeDependenciesAdvanced.tap(pluginName, modules => {
         for (const module of modules) {
@@ -81,7 +88,7 @@ class ExtractChunksPlugin {
       compilation.hooks.optimizeChunkAssets.tapAsync(pluginName, (chunks, callback) => {
         chunks.forEach(chunk => {
           chunk.files.forEach(file => {
-            console.log(1111, compilation.assets[file]._source.children)
+            // console.log(1111, compilation.assets[file]._source.children)
           });
         });
     
@@ -159,9 +166,7 @@ class ExtractChunksPlugin {
       })
 
       // 把引用公共chunk的方式替换为$app_evaluate$
-      compilation.moduleTemplates.javascript.hooks.render.tap(
-        pluginName,
-        moduleSourcePostModule => {
+      compilation.moduleTemplates.javascript.hooks.render.tap(pluginName, moduleSourcePostModule => {
           // 配置为sourcemap的源码形式
           if (moduleSourcePostModule.constructor.name === 'CachedSource') {
             let source = moduleSourcePostModule._source
