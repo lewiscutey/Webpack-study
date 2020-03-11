@@ -7,7 +7,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: {
-    'index': ['./src/index.js'],
+    index: './src/index.js',
     // 'main': ['./src/main.js']
     // 'app': './src/app.js'
   },
@@ -64,6 +64,46 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
+  },
+  optimization: {
+    // runtimeChunk: {
+    //   name: 'bundle'
+    // },
+    splitChunks: {
+      chunks: 'all',
+      minSize: 5000,
+      maxSize: 0,
+      minChunks: 2,
+      maxAsyncRequests: 6,
+      maxInitialRequests: 4,
+      automaticNameDelimiter: '~',
+      automaticNameMaxLength: 30,
+      cacheGroups: {
+        default: false,
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+          priority: -10
+        },
+        'sync-commons': {
+          chunks: 'all',
+          name: 'sync-commons',
+          minChunks: 2,
+          priority: 1,
+          reuseExistingChunk: true,
+          enforce: true
+        },
+        'async-commons': {
+          chunks: 'async',
+          name: 'async-commons',
+          minChunks: 1,
+          priority: 2,
+          reuseExistingChunk: true,
+          enforce: true
+        }
+      }
+    }
   },
   plugins: [
     // new ExtractTextPlugin('[name].css'),

@@ -39,7 +39,7 @@
 /******/ 			var fulfilled = true;
 /******/ 			for(var j = 1; j < deferredModule.length; j++) {
 /******/ 				var depId = deferredModule[j];
-/******/ 				if(installedChunks[depId] !== 0) { fulfilled = false; $app_evaluate$(`${quickappGlobal.chunkFileMap[depId]}.js`); }
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
 /******/ 			}
 /******/ 			if(fulfilled) {
 /******/ 				deferredModules.splice(i--, 1);
@@ -62,11 +62,6 @@
 /******/
 /******/ 	var deferredModules = [];
 /******/
-/******/ 	// script path function
-/******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"async-commons":"async-commons"}[chunkId]||chunkId) + ".js"
-/******/ 	}
-/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -82,7 +77,7 @@
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$);
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
@@ -91,67 +86,6 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		var promises = [];
-/******/
-/******/
-/******/ 		// JSONP chunk loading for javascript
-/******/
-/******/ 		var installedChunkData = installedChunks[chunkId];
-/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
-/******/
-/******/ 			// a Promise means "currently loading".
-/******/ 			if(installedChunkData) {
-/******/ 				promises.push(installedChunkData[2]);
-/******/ 			} else {
-/******/ 				// setup Promise in chunk cache
-/******/ 				var promise = new Promise(function(resolve, reject) {
-/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
-/******/ 				});
-/******/ 				promises.push(installedChunkData[2] = promise);
-/******/
-/******/ 				// start chunk loading
-/******/ 				var script = document.createElement('script');
-/******/ 				var onScriptComplete;
-/******/
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.src = jsonpScriptSrc(chunkId);
-/******/
-/******/ 				// create error before stack unwound to get useful stacktrace later
-/******/ 				var error = new Error();
-/******/ 				onScriptComplete = function (event) {
-/******/ 					// avoid mem leaks in IE.
-/******/ 					script.onerror = script.onload = null;
-/******/ 					clearTimeout(timeout);
-/******/ 					var chunk = installedChunks[chunkId];
-/******/ 					if(chunk !== 0) {
-/******/ 						if(chunk) {
-/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 							error.name = 'ChunkLoadError';
-/******/ 							error.type = errorType;
-/******/ 							error.request = realSrc;
-/******/ 							chunk[1](error);
-/******/ 						}
-/******/ 						installedChunks[chunkId] = undefined;
-/******/ 					}
-/******/ 				};
-/******/ 				var timeout = setTimeout(function(){
-/******/ 					onScriptComplete({ type: 'timeout', target: script });
-/******/ 				}, 120000);
-/******/ 				script.onerror = script.onload = onScriptComplete;
-/******/ 				document.head.appendChild(script);
-/******/ 			}
-/******/ 		}
-/******/ 		return Promise.all(promises);
-/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -203,12 +137,9 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "";
 /******/
-/******/ 	// on error function for async loading
-/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
-/******/
-/******/ 	var jsonpArray = quickappGlobal["webpackJsonp"] = quickappGlobal["webpackJsonp"] || [];
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
 /******/ 	jsonpArray.push = webpackJsonpCallback;
 /******/ 	jsonpArray = jsonpArray.slice();
@@ -217,31 +148,205 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./src/index.js","sync-commons"]);
+/******/ 	deferredModules.push(["./src/index.js","sync-commons~app~index"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/d.js":
+/*!******************!*\
+  !*** ./src/d.js ***!
+  \******************/
+/*! exports provided: mod, d */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mod", function() { return mod; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return d; });
+function mod(a, b) {
+  return a % b
+}
+const d = 'd'
+
+// class ExtractChunksPlugin {
+//   constructor(options) {
+//     this.options = options
+//     this.chunkPath = options.chunkPath || 'Chunks'
+//   }
+
+//   apply(compiler) {
+//     compiler.hooks.thisCompilation.tap(pluginName, compilation => {
+//       // 抽取公共chunk
+//       compilation.hooks.optimizeDependenciesAdvanced.tap(pluginName, modules => {
+//         for (const module of modules) {
+//           // 被依赖小于2，不会当做公共chunk进行抽取
+//           if (module.reasons.length < 2) continue
+
+//           const chunkName = module.resource.match(/\w+(?=\.)/gi)[0]
+//           const hasChunkName = hasChunk(chunkName, compilation)
+//           if (hasChunkName) continue
+
+//           const newChunk = compilation.addChunk(chunkName)
+//           debugger
+
+//           // Module内部会进行关联，这个方法判断如果已经存在这个chunk，则返回false；
+//           if (module.addChunk(newChunk)) {
+//             newChunk.addModule(module)
+//             extractModules.set(chunkName, module)
+//           }
+
+//           if (newChunk.groupsIterable.chunkGroup) {
+//             newChunk.groupsIterable.chunkGroup.addChild(newChunk)
+//           }
+
+//           newChunk.hasExistedChunk = true
+//         }
+//       })
+
+//       // 移除页面Chunk中已经存在的公共module，因为这个公共module已经以单独chunk的形式存在
+//       compilation.hooks.optimizeChunks.tap(pluginName, chunks => {
+//         chunks.forEach(chunk => {
+//           extractModules.forEach(module => {
+//             if (chunk.containsModule(module) && chunk.hasEntryModule()) {
+//               chunk.removeModule(module)
+//               module.removeChunk(chunk)
+//             }
+//           })
+//         })
+//       })
+
+//       // 各个chunk配置附加参数及全局quickappGlobal
+//       compilation.hooks.chunkAsset.tap(pluginName, (chunk, filename) => {
+//         const sourceChildren = compilation.assets[filename]._source.children
+
+//         let _actualParamStr = actualParamStr
+//         let _formalParamStr = formalParamStr
+//         if (chunk.entryModule) {
+//           // sourceChildren.splice(1, 0, quickappGlobal)
+//           _actualParamStr = actualModuleRequireParam
+//             .concat(appModuleRequireNativeFunctions)
+//             .join(', ')
+//           _formalParamStr = formalModuleRequireParam
+//             .concat(appModuleRequireNativeFunctions)
+//             .join(', ')
+//         }
+
+//         sourceChildren.forEach((item, index) => {
+//           // 运行时的源码形式
+//           if (item.constructor.name === 'PrefixSource') {
+//             let content = item._source._value
+//             // window -> global
+//             content = windowReplaceWithGlobal(content)
+//             content = content.replace(
+//               /(?<=(if\(installedChunks\[depId\]\s+!==\s+0\)\s+))fulfilled\s+=\s+false;/,
+//               '{ fulfilled = false; $app_evaluate$(`${quickappGlobal.chunkFileMap[depId]}.js`); }' // eslint-disable-line
+//             )
+//             // 引入额外方法
+//             content = content.replace(
+//               /(?<=(modules\[moduleId\].call\())module.exports,\s+module,\s+module.exports,\s+__webpack_require__/,
+//               _actualParamStr
+//             )
+//             item._source._value = content
+//           } else if (item.constructor.name === 'String') {
+//             // window -> global
+//             let content = windowReplaceWithGlobal(item)
+//             // 引入额外方法
+//             content = content.replace(
+//               /(?<=function\()module,\s+__webpack_exports__(,\s+__webpack_require__)?/,
+//               _formalParamStr
+//             )
+//             sourceChildren[index] = content
+//           }
+//         })
+
+//         // 抽取的chunk放到配置的（默认为Chunks）文件夹下
+//         if (chunk.hasExistedChunk) {
+//           let tempFile = compilation.assets[filename]
+//           delete compilation.assets[filename]
+//           let newFilename = this.chunkPath + '/' + filename
+//           chunk.files = chunk.files.map(item => {
+//             if (item === filename) {
+//               return newFilename
+//             }
+//           })
+//           compilation.assets[newFilename] = tempFile
+//         }
+//       })
+
+//       // 把引用公共chunk的方式替换为$app_evaluate$
+//       compilation.moduleTemplates.javascript.hooks.render.tap(
+//         pluginName,
+//         moduleSourcePostModule => {
+//           // 配置为sourcemap的源码形式
+//           if (moduleSourcePostModule.constructor.name === 'CachedSource') {
+//             let source = moduleSourcePostModule._source
+//             if (
+//               source &&
+//               source.constructor.name === 'ReplaceSource' &&
+//               source.replacements &&
+//               source.replacements.length
+//             ) {
+//               source.replacements.map(items => {
+//                 let chunkName =
+//                   items.content.match(/\w+(?=\.js)/gi) && items.content.match(/\w+(?=\.js)/gi)[0]
+//                 let chunkPath = `${compiler.outputPath}/${this.chunkPath}/${chunkName}.js`
+//                 items.content = items.content.replace(
+//                   /\s=\s__webpack_require__\((.+?)\);/,
+//                   ` = $app_evaluate$('${chunkPath}');` // eslint-disable-line
+//                 )
+//               })
+//             }
+//             moduleSourcePostModule._source = source
+//           } else if (moduleSourcePostModule.constructor.name === 'RawSource') {
+//             // 默认为eval的源码形式
+//             let value = moduleSourcePostModule._value
+//             if (value) {
+//               let chunkName = value.match(/\s=\s__webpack_require__\((.+?)\);/gi)
+//               chunkName && chunkName.map(item => {
+//                 item = item.match(/(\w+)\s+/ig) && item.match(/(\w+)\s+/ig)[0] && item.match(/(\w+)\s+/ig)[0].slice(0, -1)
+//                 if(!extractModules.get(item)) return
+//                 let chunkPath = `${compiler.outputPath}/${this.chunkPath}/${item}.js`
+//                 value = value.replace(
+//                   new RegExp(` = __webpack_require__((.+?)${item}(.+?));`, 'i'),
+//                   ` = $app_evaluate$('${chunkPath}');` // eslint-disable-line
+//                 )
+//               })
+//             }
+//             moduleSourcePostModule._value = value
+//           }
+//         }
+//       )
+//     })
+//   }
+// }
+
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /*! no exports provided */
-/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _d__WEBPACK_IMPORTED_MODULE_0__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/d.js');
-/* harmony import */ var _a_scss__WEBPACK_IMPORTED_MODULE_1__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/null.js');
-/* harmony import */ var _a_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_a_scss__WEBPACK_IMPORTED_MODULE_1__);
-
-Object(_d__WEBPACK_IMPORTED_MODULE_0__["mod"])(1, 2)
+/* harmony import */ var _b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./b */ "./src/b.js");
+/* harmony import */ var _d__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./d */ "./src/d.js");
 
 
-
-__webpack_require__.e(/*! import() */ "async-commons").then(__webpack_require__.bind(null, /*! ./c */ "./src/c.js")).then(del => del(1, 2))
+// import './a.scss'
+// import { del } from './common1/aa'
+// import { del as del1 } from './common/aa'
+// import Vue from 'vue'
+Object(_b__WEBPACK_IMPORTED_MODULE_0__["add"])(1, 2)
+// del(1, 2)
+// del1(1, 2)
+Object(_d__WEBPACK_IMPORTED_MODULE_1__["mod"])(100, 11)
 
 /***/ })
 

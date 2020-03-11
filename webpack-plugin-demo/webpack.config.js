@@ -1,6 +1,7 @@
 const path = require('path')
 const FileListPlugin = require('./src/plugins/FileListPlugin')
 const ExtractChunksPlugin = require('./src/plugins/ExtractChunksPlugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: "development",
@@ -12,7 +13,6 @@ module.exports = {
   output: {
     filename: '[name].js',
     chunkFilename: '[name].js',
-    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -29,15 +29,17 @@ module.exports = {
     // },
     splitChunks: {
       chunks: 'all',
-      minSize: 5000,
-      maxSize: 0,
-      minChunks: 2,
-      maxAsyncRequests: 6,
-      maxInitialRequests: 4,
-      automaticNameDelimiter: '~',
-      automaticNameMaxLength: 30,
+      // minSize: 5000,
+      // maxSize: 0,
+      // minChunks: 2,
+      // maxAsyncRequests: 6,
+      // maxInitialRequests: 4,
+      // automaticNameDelimiter: '~',
+      // automaticNameMaxLength: 30,
       cacheGroups: {
-        default: false,
+        default: {
+          minChunks: 1
+        },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
@@ -46,7 +48,7 @@ module.exports = {
         },
         'sync-commons': {
           chunks: 'all',
-          name: 'sync-commons',
+          // name: 'sync-commons',
           minChunks: 2,
           priority: 1,
           reuseExistingChunk: true,
@@ -60,24 +62,31 @@ module.exports = {
           reuseExistingChunk: true,
           enforce: true
         },
-        styles: {
-          chunks: 'all',
-          test: /\.less|scss|css$/,
-          name: 'styles',
-          minChunks: 2,
-          priority: 1,
-          reuseExistingChunk: true,
-          enforce: true
-        }
+        // styles: {
+        //   chunks: 'all',
+        //   test: /\.less|scss|css$/,
+        //   name: 'styles',
+        //   minChunks: 2,
+        //   priority: 1,
+        //   reuseExistingChunk: true,
+        //   enforce: true
+        // }
       }
     }
   },
   resolve: {
   },
   plugins: [
-    // new FileListPlugin()
-    new ExtractChunksPlugin({
-      chunkPath: ''
-    })
+    new HtmlWebpackPlugin({
+      title: 'ExtractTextPlugin',
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'src/index.html'),
+      inject: 'head',
+      chunks: ['index']
+    }),
+    new FileListPlugin()
+    // new ExtractChunksPlugin({
+    //   chunkPath: ''
+    // })
   ]
 }

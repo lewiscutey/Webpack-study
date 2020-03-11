@@ -2,6 +2,10 @@ class FileListPlugin {
   apply(compiler) {
     // emit 是异步 hook，使用 tapAsync 触及它，还可以使用 tapPromise/tap(同步)
     compiler.hooks.emit.tapAsync('FileListPlugin', (compilation, callback) => {
+      let stats = compilation.getStats().toJson({chunkModules: true});
+      let stringifiedStats = JSON.stringify(stats);
+      stringifiedStats = stringifiedStats.replace(/</g, '&lt;').replace(/</g, '&gt;');
+      debugger
       // 在生成文件中，创建一个头部字符串：
       var filelist = 'In this build:\n\n';
 

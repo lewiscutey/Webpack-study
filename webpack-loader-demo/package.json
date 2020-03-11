@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "test": "jest"
+    "test": "jest",
+    "debug": "node --inspect-brk ./node_modules/webpack/bin/webpack.js --inline --progress"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "style-loader": "^1.0.0",
+    "vue": "^2.6.11",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   }

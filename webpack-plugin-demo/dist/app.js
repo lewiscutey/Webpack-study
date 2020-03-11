@@ -39,7 +39,7 @@
 /******/ 			var fulfilled = true;
 /******/ 			for(var j = 1; j < deferredModule.length; j++) {
 /******/ 				var depId = deferredModule[j];
-/******/ 				if(installedChunks[depId] !== 0) { fulfilled = false; $app_evaluate$(`${quickappGlobal.chunkFileMap[depId]}.js`); }
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
 /******/ 			}
 /******/ 			if(fulfilled) {
 /******/ 				deferredModules.splice(i--, 1);
@@ -62,11 +62,6 @@
 /******/
 /******/ 	var deferredModules = [];
 /******/
-/******/ 	// script path function
-/******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"async-commons":"async-commons"}[chunkId]||chunkId) + ".js"
-/******/ 	}
-/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -82,7 +77,7 @@
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$);
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
@@ -91,67 +86,6 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		var promises = [];
-/******/
-/******/
-/******/ 		// JSONP chunk loading for javascript
-/******/
-/******/ 		var installedChunkData = installedChunks[chunkId];
-/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
-/******/
-/******/ 			// a Promise means "currently loading".
-/******/ 			if(installedChunkData) {
-/******/ 				promises.push(installedChunkData[2]);
-/******/ 			} else {
-/******/ 				// setup Promise in chunk cache
-/******/ 				var promise = new Promise(function(resolve, reject) {
-/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
-/******/ 				});
-/******/ 				promises.push(installedChunkData[2] = promise);
-/******/
-/******/ 				// start chunk loading
-/******/ 				var script = document.createElement('script');
-/******/ 				var onScriptComplete;
-/******/
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.src = jsonpScriptSrc(chunkId);
-/******/
-/******/ 				// create error before stack unwound to get useful stacktrace later
-/******/ 				var error = new Error();
-/******/ 				onScriptComplete = function (event) {
-/******/ 					// avoid mem leaks in IE.
-/******/ 					script.onerror = script.onload = null;
-/******/ 					clearTimeout(timeout);
-/******/ 					var chunk = installedChunks[chunkId];
-/******/ 					if(chunk !== 0) {
-/******/ 						if(chunk) {
-/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 							var realSrc = event && event.target && event.target.src;
-/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 							error.name = 'ChunkLoadError';
-/******/ 							error.type = errorType;
-/******/ 							error.request = realSrc;
-/******/ 							chunk[1](error);
-/******/ 						}
-/******/ 						installedChunks[chunkId] = undefined;
-/******/ 					}
-/******/ 				};
-/******/ 				var timeout = setTimeout(function(){
-/******/ 					onScriptComplete({ type: 'timeout', target: script });
-/******/ 				}, 120000);
-/******/ 				script.onerror = script.onload = onScriptComplete;
-/******/ 				document.head.appendChild(script);
-/******/ 			}
-/******/ 		}
-/******/ 		return Promise.all(promises);
-/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -203,12 +137,9 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "";
 /******/
-/******/ 	// on error function for async loading
-/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
-/******/
-/******/ 	var jsonpArray = quickappGlobal["webpackJsonp"] = quickappGlobal["webpackJsonp"] || [];
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
 /******/ 	jsonpArray.push = webpackJsonpCallback;
 /******/ 	jsonpArray = jsonpArray.slice();
@@ -217,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./src/a.js","sync-commons"]);
+/******/ 	deferredModules.push(["./src/a.js","sync-commons~app~index"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -229,46 +160,25 @@
   !*** ./src/a.js ***!
   \******************/
 /*! no exports provided */
-/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _b__WEBPACK_IMPORTED_MODULE_0__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/b.js');
-/* harmony import */ var _d__WEBPACK_IMPORTED_MODULE_1__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/d.js');
-/* harmony import */ var _a_scss__WEBPACK_IMPORTED_MODULE_2__ = $app_evaluate$('/Users/lewis/Documents/项目/Github/Webpack-study/webpack-plugin-demo/dist/Chunks/null.js');
-/* harmony import */ var _a_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_a_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./b */ "./src/b.js");
 
-
-
+// import { mod } from "./d";
+// import './a.scss'
 // import { del } from './common1/aa'
 // import { del as del1 } from './common/aa'
 // import Vue from 'vue'
 Object(_b__WEBPACK_IMPORTED_MODULE_0__["add"])(1, 2)
 // del(1, 2)
 // del1(1, 2)
-Object(_d__WEBPACK_IMPORTED_MODULE_1__["mod"])(100, 11)
-
-__webpack_require__.e(/*! import() */ "async-commons").then(__webpack_require__.bind(null, /*! ./c */ "./src/c.js")).then(del => del(1, 2))
-
-var vm = new Vue({
-  // 选项
-})
-
-/***/ }),
-
-/***/ "./src/common1/aa.js":
-/*!***************************!*\
-  !*** ./src/common1/aa.js ***!
-  \***************************/
-/*! exports provided: del */
-/***/ (function(module, exports, __webpack_require__, $app_define$, $app_bootstrap$, $app_require$) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "del", function() { return del; });
-function del (a, b) {
-  return a - b
-}
+// mod(100, 11)
+console.log(11111111)
+// import('./d').then(() => {
+//   console.log(11)
+// })
 
 /***/ })
 
