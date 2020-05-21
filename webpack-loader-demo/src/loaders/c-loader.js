@@ -3,7 +3,7 @@ module.exports = function() {
   return;
 }
 
-module.exports.pitch = function(remainingRequest, precedingRequest, data) {
-  data.value = 42
-  console.log(`c-pitch`)
-}
+// module.exports.pitch = function(remainingRequest, precedingRequest, data) {
+//   data.value = 42
+//   console.log(`c-pitch`)
+// }

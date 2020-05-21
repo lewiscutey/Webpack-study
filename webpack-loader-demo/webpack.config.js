@@ -55,14 +55,21 @@ module.exports = {
             options: {
               aa: 11,
               bb: 22
-            }
+            },
           },
-          'b-loader.js',
           'c-loader.js',
           // {loader: 'babel-loader'}
         ],
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.js$/,
+        use: [
+          'b-loader.js',
+        ],
+        enforce: 'pre',
+        exclude: /node_modules/
+      },
     ]
   },
   optimization: {
