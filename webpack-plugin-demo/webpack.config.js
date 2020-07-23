@@ -2,6 +2,7 @@ const path = require('path')
 const FileListPlugin = require('./src/plugins/FileListPlugin')
 const ExtractChunksPlugin = require('./src/plugins/ExtractChunksPlugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: "development",
@@ -84,7 +85,12 @@ module.exports = {
       inject: 'head',
       chunks: ['index']
     }),
-    new FileListPlugin()
+    new FileListPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, 'src/copy.txt') },
+      ],
+    }),
     // new ExtractChunksPlugin({
     //   chunkPath: ''
     // })
